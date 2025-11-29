@@ -1,65 +1,67 @@
-import Image from "next/image";
+import { Hero } from "@/components/Hero";
+import { Navbar } from "@/components/Navbar";
+import { Skills } from "@/components/Skills";
+import { Experience } from "@/components/Experience";
+import { Projects } from "@/components/Projects";
+import { Publications } from "@/components/Publications";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="relative" role="main">
+      <Navbar />
+      <section id="hero" aria-label="Introduction">
+        <Hero />
+      </section>
+      <section id="about" className="py-16 border-t border-[rgba(15,23,42,0.7)]" aria-label="About Me">
+        {/* About section is combined with Hero/Skills in the design flow, but let's keep a dedicated slot if needed or just use Skills as the start of 'content' */}
+        {/* The user design had a specific 'About' section with stats. I'll implement a simple version here or reuse Skills structure if it fits better. 
+            Actually, looking at the design, 'About' had 'Who I am' and stats. I missed creating a dedicated About component. 
+            I'll add a simple About section inline or create a component. Let's create a simple inline one for now to match the structure. */}
+        <div className="max-w-[1120px] mx-auto px-6">
+          <div className="flex flex-col gap-1 mb-9">
+            <p className="text-[0.8rem] tracking-[0.26em] uppercase text-[rgba(129,140,248,0.85)]">About</p>
+            <h2 className="text-[1.7rem] m-0 font-bold text-text">Who I am</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-[1.65fr_1.25fr] gap-7">
+            <div className="p-[1.4rem_1.5rem] rounded-[18px] bg-[radial-gradient(circle_at_0_0,rgba(79,70,229,0.18),transparent_60%)] border border-transparent shadow-xs text-[0.96rem] leading-[1.6] text-[rgba(226,232,240,0.9)]"
+              style={{
+                backgroundImage: "radial-gradient(circle at 0 0, rgba(79, 70, 229, 0.18), transparent 60%), linear-gradient(135deg, rgba(56, 189, 248, 0.5), rgba(79, 70, 229, 0.5))",
+                backgroundOrigin: "border-box",
+                backgroundClip: "padding-box, border-box"
+              }}>
+              Frontend Developer with 2 years of experience specializing in React.js and modern frontend technologies. Skilled in building scalable, responsive, and high-performance web applications.
+            </div>
+            <div className="grid gap-3">
+              <div className="p-[0.9rem_1rem] rounded-[12px] bg-[rgba(15,23,42,0.96)] border border-[rgba(75,85,99,0.8)]">
+                <span className="block text-[0.75rem] uppercase tracking-[0.15em] text-[rgba(148,163,184,0.9)]">Current Role</span>
+                <span className="block mt-0.5 text-[0.95rem]">Software Engineer I</span>
+              </div>
+              <div className="p-[0.9rem_1rem] rounded-[12px] bg-[rgba(15,23,42,0.96)] border border-[rgba(75,85,99,0.8)]">
+                <span className="block text-[0.75rem] uppercase tracking-[0.15em] text-[rgba(148,163,184,0.9)]">Company</span>
+                <span className="block mt-0.5 text-[0.95rem]">Promact Infotech Pvt. Ltd.</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+      <section id="skills" className="py-16 border-t border-[rgba(15,23,42,0.7)]" aria-label="Technical Skills">
+        <Skills />
+      </section>
+      <section id="experience" className="py-16 border-t border-[rgba(15,23,42,0.7)]" aria-label="Work Experience">
+        <Experience />
+      </section>
+      <section id="projects" className="py-16 border-t border-[rgba(15,23,42,0.7)]" aria-label="Projects">
+        <Projects />
+      </section>
+      <section id="publications" className="py-16 border-t border-[rgba(15,23,42,0.7)]" aria-label="Publications and Blogs">
+        <Publications />
+      </section>
+      <section id="contact" className="py-16 border-t border-[rgba(15,23,42,0.7)]" aria-label="Contact Information">
+        <Contact />
+      </section>
+      <Footer />
+    </main>
   );
 }
