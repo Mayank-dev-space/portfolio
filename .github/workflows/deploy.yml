@@ -30,26 +30,7 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm ci
-
-      - name: Generate envData.js from GitHub Secrets
-        run: |
-          mkdir -p public/js
-          cat > public/js/envData.js << 'EOF'
-          window.__PROFILE_DATA__ = {
-            name: "${{ secrets.NAME }}",
-            title: "${{ secrets.TITLE }}",
-            location: "${{ secrets.LOCATION }}",
-            email: "${{ secrets.EMAIL }}",
-            phone: "${{ secrets.PHONE }}",
-            linkedin: "${{ secrets.LINKEDIN }}",
-            skills: ${{ secrets.SKILLS }},
-            experience: ${{ secrets.EXPERIENCE }},
-            education: ${{ secrets.EDUCATION }},
-            projects: ${{ secrets.PROJECTS }},
-            blogs: ${{ secrets.BLOGS }}
-          };
-          EOF
+        run: npm i
 
       - name: Build Next.js app
         run: npm run build
