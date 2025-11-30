@@ -135,7 +135,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#020617] text-[#e5e7eb]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-bg text-text`}
       >
         <script
           type="application/ld+json"

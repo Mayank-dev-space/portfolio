@@ -18,7 +18,7 @@ export function Hero() {
                             className="text-[0.8rem] tracking-[0.28em] uppercase text-accent-strong mb-3 font-medium flex items-center gap-2"
                         >
                             <IconCode className="w-4 h-4" />
-                            Software Engineer
+                            {resumeData.personalInfo.designation}
                         </motion.p>
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
@@ -72,7 +72,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.5 }}
-                            className="flex flex-wrap gap-5 p-3.5 rounded-full bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.65),transparent_55%)] border border-transparent"
+                            className="flex flex-wrap gap-5 p-3.5 rounded-2xl bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.65),transparent_55%)] border border-transparent"
                             style={{
                                 backgroundImage:
                                     "radial-gradient(circle at top, rgba(37, 99, 235, 0.65), transparent 55%), linear-gradient(120deg, rgba(99, 102, 241, 0.5), rgba(236, 72, 153, 0.5))",
@@ -84,14 +84,14 @@ export function Hero() {
                                 <span className="block text-[0.7rem] tracking-[0.16em] uppercase text-gray-400/80">
                                     Experience
                                 </span>
-                                <span className="block text-[0.9rem] mt-0.5">2+ Years</span>
+                                <span className="block text-[0.9rem] mt-0.5">{resumeData.personalInfo.experience}</span>
                             </div>
                             <div className="min-w-[120px]">
                                 <span className="block text-[0.7rem] tracking-[0.16em] uppercase text-gray-400/80">
                                     Tech Stack
                                 </span>
                                 <span className="block text-[0.9rem] mt-0.5">
-                                    React, Next.js
+                                    {resumeData.personalInfo.techStack.join(", ")}
                                 </span>
                             </div>
                         </motion.div>
@@ -126,7 +126,7 @@ export function Hero() {
                                     className="relative w-[56%] aspect-square rounded-[32%] bg-[radial-gradient(circle_at_50%_10%,#f97316,#ec4899_40%,#4f46e5_76%)] shadow-[0_18px_40px_#0f172a] grid place-items-center"
                                 >
                                     <span className="font-extrabold text-white text-2xl tracking-widest">
-                                        MV
+                                        {resumeData.personalInfo.initials}
                                     </span>
                                 </motion.div>
                             </div>
@@ -139,7 +139,7 @@ export function Hero() {
                                 transition={{ delay: 0.8, type: "spring" }}
                                 className="absolute top-[16%] right-[8%] px-3.5 py-1.5 rounded-full text-[0.7rem] tracking-[0.16em] uppercase bg-[rgba(15,23,42,0.9)] text-gray-200 border border-[rgba(148,163,184,0.6)] cursor-default"
                             >
-                                Frontend
+                                {resumeData.personalInfo.heroTags[0]}
                             </motion.div>
                             <motion.div
                                 initial={{ opacity: 0, scale: 0 }}
@@ -148,7 +148,7 @@ export function Hero() {
                                 transition={{ delay: 0.9, type: "spring" }}
                                 className="absolute bottom-[16%] left-[10%] px-3.5 py-1.5 rounded-full text-[0.7rem] tracking-[0.16em] uppercase bg-[rgba(15,23,42,0.9)] text-gray-200 border border-[rgba(148,163,184,0.6)] cursor-default"
                             >
-                                Backend
+                                {resumeData.personalInfo.heroTags[1]}
                             </motion.div>
                         </div>
                     </motion.div>

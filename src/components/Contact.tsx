@@ -30,8 +30,7 @@ export function Contact() {
                         Say Hello
                     </h3>
                     <p className="mt-1 text-[0.92rem] text-[rgba(209,213,219,0.9)]">
-                        Whether you have a question, a project idea, or just want to
-                        connect, feel free to reach out.
+                        {resumeData.personalInfo.contactDescription}
                     </p>
 
                     <div className="mt-5 grid gap-4">

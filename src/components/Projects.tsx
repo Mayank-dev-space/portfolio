@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import { resumeData } from "@/data/resume";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { IconExternalLink, IconCode } from "@tabler/icons-react";
+import { motion } from "framer-motion";
+import { IconCode, IconExternalLink } from "@tabler/icons-react";
 
 export function Projects() {
     return (
@@ -14,8 +14,7 @@ export function Projects() {
                 </p>
                 <h2 className="text-[1.7rem] m-0 font-bold text-text">Selected Work</h2>
             </div>
-
-            <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {resumeData.projects.map((project, index) => (
                     <ProjectCard key={index} project={project} index={index} />
                 ))}
@@ -25,18 +24,6 @@ export function Projects() {
 }
 
 function ProjectCard({ project, index }: { project: any; index: number }) {
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseX = useSpring(x, { stiffness: 500, damping: 100 });
-    const mouseY = useSpring(y, { stiffness: 500, damping: 100 });
-
-    function onMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-        const { left, top } = currentTarget.getBoundingClientRect();
-        x.set(clientX - left);
-        y.set(clientY - top);
-    }
-
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -44,68 +31,87 @@ function ProjectCard({ project, index }: { project: any; index: number }) {
             viewport={{ once: true }}
             transition={{ delay: index * 0.1, duration: 0.5 }}
             whileHover={{ y: -5 }}
-            onMouseMove={onMouseMove}
-            className="group relative overflow-hidden rounded-[18px] bg-[radial-gradient(circle_at_0_0,rgba(52,211,153,0.08),transparent_55%)] border border-transparent p-[1rem_1rem_1.1rem] cursor-pointer"
-            style={{
-                backgroundImage:
-                    "radial-gradient(circle at 0 0, rgba(52, 211, 153, 0.08), transparent 55%), linear-gradient(135deg, rgba(59, 130, 246, 0.7), rgba(236, 72, 153, 0.7))",
-                backgroundOrigin: "border-box",
-                backgroundClip: "padding-box, border-box",
-            }}
+            className="group relative flex flex-col h-full overflow-hidden rounded-[18px] bg-[rgba(15,23,42,0.95)] border border-[rgba(55,65,81,0.9)] p-[1.2rem] shadow-xs hover:border-[rgba(129,140,248,0.5)] hover:shadow-[0_12px_28px_rgba(79,70,229,0.15)] transition-all duration-300"
         >
-            {/* Hover Gradient Effect */}
-            <motion.div
-                className="pointer-events-none absolute -inset-px rounded-[18px] opacity-0 transition duration-300 group-hover:opacity-100"
-                style={{
-                    background: useTransform(
-                        [mouseX, mouseY],
-                        ([newX, newY]) =>
-                            `radial-gradient(600px circle at ${newX}px ${newY}px, rgba(244,114,182,0.15), transparent 40%)`
-                    ),
-                }}
-            />
+            <div className="absolute inset-0 bg-[linear-gradient(130deg,rgba(129,140,248,0.03),transparent_40%,rgba(236,72,153,0.03))] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-            <div className="relative z-10">
-                <div className="flex justify-between items-start gap-2.5 mb-2">
-                    <h3 className="text-[1rem] font-medium text-white group-hover:text-accent transition-colors">
+            <div className="relative z-10 flex flex-col h-full">
+                <div className="flex justify-between items-start gap-2.5 mb-3">
+                    <h3 className="text-[1.1rem] font-medium text-white group-hover:text-accent transition-colors">
                         {project.title}
                     </h3>
-                    <motion.span
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="text-[0.65rem] uppercase tracking-[0.16em] px-2 py-0.5 rounded-full bg-[rgba(15,23,42,0.93)] border border-[rgba(148,163,184,0.7)] text-gray-300 whitespace-nowrap flex items-center gap-1"
-                    >
-                        <IconCode className="w-3 h-3" />
-                        Project
-                    </motion.span>
+                    {project.link && (
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-muted hover:text-accent transition-colors p-1"
+                        >
+                            <IconExternalLink className="w-4 h-4" />
+                        </a>
+                    )}
                 </div>
-                <p className="text-[0.9rem] text-[rgba(226,232,240,0.92)] mb-3 line-clamp-3">
+
+                <p className="text-[0.9rem] text-muted mb-4 line-clamp-3">
                     {project.description}
                 </p>
-                <div className="flex flex-wrap gap-x-2 gap-y-1 mb-3">
-                    {project.technologies.map((tech: string, i: number) => (
-                        <motion.span
-                            key={i}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 + i * 0.05 }}
-                            className="text-[0.72rem] text-[rgba(191,219,254,0.88)] px-[0.45rem] py-[0.1rem] rounded-full bg-[rgba(15,23,42,0.8)]"
-                        >
-                            {tech}
-                        </motion.span>
-                    ))}
-                </div>
-                {project.link && (
-                    <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-[0.8rem] text-[rgba(191,219,254,0.95)] hover:text-accent transition-colors"
-                    >
-                        <IconExternalLink className="w-3.5 h-3.5" />
-                        View Project
-                    </a>
+
+                {project.responsibilities && project.responsibilities.length > 0 && (
+                    <div className="mb-4">
+                        <h4 className="text-[0.85rem] font-medium text-[rgba(129,140,248,0.9)] mb-1.5">Key Responsibilities</h4>
+                        <ul className="list-disc list-inside space-y-1">
+                            {project.responsibilities.map((item: string, i: number) => (
+                                <li key={i} className="text-[0.8rem] text-[rgba(203,213,225,0.8)] leading-relaxed pl-1">
+                                    <span className="-ml-1">{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 )}
+
+                {project.impact && project.impact.length > 0 && (
+                    <div className="mb-4">
+                        <h4 className="text-[0.85rem] font-medium text-[rgba(129,140,248,0.9)] mb-1.5">Impact</h4>
+                        <ul className="list-disc list-inside space-y-1">
+                            {project.impact.map((item: string, i: number) => (
+                                <li key={i} className="text-[0.8rem] text-[rgba(203,213,225,0.8)] leading-relaxed pl-1">
+                                    <span className="-ml-1">{item}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                <div className="mt-auto">
+                    {project.technologies && project.technologies.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-4">
+                            {project.technologies.slice(0, 4).map((tech: string, i: number) => (
+                                <span
+                                    key={i}
+                                    className="text-[0.75rem] text-[rgba(191,219,254,0.88)] px-2.5 py-1 rounded-full bg-[rgba(30,41,59,0.6)] border border-[rgba(51,65,85,0.5)]"
+                                >
+                                    {tech}
+                                </span>
+                            ))}
+                            {project.technologies.length > 4 && (
+                                <span className="text-[0.75rem] text-muted px-2 py-1">
+                                    +{project.technologies.length - 4}
+                                </span>
+                            )}
+                        </div>
+                    )}
+
+                    {project.link && (
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-[0.85rem] text-[rgba(191,219,254,0.95)] group-hover:text-accent transition-colors"
+                        >
+                            View Project <IconExternalLink className="w-3.5 h-3.5" />
+                        </a>
+                    )}
+                </div>
             </div>
         </motion.div>
     );
